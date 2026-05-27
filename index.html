@@ -1,0 +1,1918 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamed Noushad | Software Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=EB+Garamond:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.42/build/spline-viewer.js"></script>
+    <style>
+        :root {
+            --primary-dark: #1a1a1a;
+            --secondary-dark: #2d2d2d;
+            --accent-gold: #c9a961;
+            --accent-copper: #b87333;
+            --text-primary: #f5f5f5;
+            --text-secondary: #b8b8b8;
+            --border-color: #404040;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background-color: var(--primary-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Decorative background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(201, 169, 97, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(184, 115, 51, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Grain texture overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header Navigation */
+        header {
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'EB Garamond', serif;
+            font-size: 16px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-gold);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .language-toggle {
+            padding: 8px 20px;
+            font-family: 'EB Garamond', serif;
+            font-size: 14px;
+            letter-spacing: 1.5px;
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .language-toggle:hover {
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+        }
+
+        .language-toggle:active {
+            transform: scale(0.95);
+        }
+
+        /* Language switching animation */
+        @keyframes langSwitch {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .translating {
+            animation: langSwitch 0.3s ease-in-out;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 0 180px;
+            position: relative;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .spline-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .spline-container spline-viewer {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Hide Spline watermark */
+        spline-viewer::part(logo) {
+            display: none !important;
+        }
+
+        spline-viewer {
+            pointer-events: auto;
+        }
+
+        /* Additional watermark hiding */
+        .spline-container spline-viewer::part(container) {
+            position: relative;
+        }
+
+        .spline-container spline-viewer::part(logo),
+        .spline-container spline-viewer::part(branding) {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            display: none !important;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-family: 'EB Garamond', serif;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 84px;
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 40px;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 strong {
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+
+        .hero-description {
+            font-size: 22px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 50px;
+            max-width: 700px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 25px;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 18px 45px;
+            font-family: 'EB Garamond', serif;
+            font-size: 16px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid var(--accent-gold);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-copper);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn-primary:hover::before {
+            left: 0;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-gold);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+        }
+
+        /* Section Titles */
+        .section {
+            padding: 120px 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .section-header {
+            margin-bottom: 80px;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 56px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+        }
+
+        /* Expertise Grid */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px;
+        }
+
+        .expertise-card {
+            padding: 50px 40px;
+            border: 1px solid var(--border-color);
+            background: rgba(45, 45, 45, 0.3);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .expertise-card:nth-child(1) { animation-delay: 0.1s; }
+        .expertise-card:nth-child(2) { animation-delay: 0.2s; }
+        .expertise-card:nth-child(3) { animation-delay: 0.3s; }
+        .expertise-card:nth-child(4) { animation-delay: 0.4s; }
+        .expertise-card:nth-child(5) { animation-delay: 0.5s; }
+        .expertise-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .expertise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(201, 169, 97, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .expertise-card:hover::before {
+            left: 100%;
+        }
+
+        .expertise-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .expertise-icon {
+            font-size: 48px;
+            margin-bottom: 25px;
+            color: var(--accent-gold);
+            filter: drop-shadow(0 2px 8px rgba(201, 169, 97, 0.3));
+            font-weight: 400;
+        }
+
+        .expertise-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .expertise-card p {
+            font-size: 17px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .tech-stack {
+            margin-top: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tech-tag {
+            padding: 6px 16px;
+            font-family: 'EB Garamond', serif;
+            font-size: 13px;
+            background: rgba(201, 169, 97, 0.1);
+            border: 1px solid rgba(201, 169, 97, 0.3);
+            color: var(--accent-gold);
+            letter-spacing: 0.5px;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            gap: 60px;
+        }
+
+        .project-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.3s; }
+
+        .project-card:nth-child(even) .project-image {
+            order: 2;
+        }
+
+        .project-image {
+            height: 400px;
+            background: var(--secondary-dark);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(201, 169, 97, 0.2), rgba(184, 115, 51, 0.2));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .project-card:hover .project-image::before {
+            opacity: 1;
+        }
+
+        .project-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            color: var(--accent-gold);
+            opacity: 0.3;
+        }
+
+        .project-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 38px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .project-type {
+            font-family: 'EB Garamond', serif;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 25px;
+        }
+
+        .project-description {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'EB Garamond', serif;
+            font-size: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent-gold);
+            padding-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            padding-bottom: 8px;
+            color: var(--accent-copper);
+            border-color: var(--accent-copper);
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 80px;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -65px;
+            top: 0;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            border: 3px solid var(--primary-dark);
+        }
+
+        .timeline-period {
+            font-family: 'EB Garamond', serif;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+        }
+
+        .timeline-item h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .timeline-company {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .timeline-description {
+            font-size: 17px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .timeline-achievements {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .timeline-achievements li {
+            padding-left: 30px;
+            position: relative;
+            margin-bottom: 12px;
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .timeline-achievements li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .contact-content::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(201, 169, 97, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: translateX(-50%) scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateX(-50%) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        .contact-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 64px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-copper) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-description {
+            font-size: 20px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 50px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
+
+        .contact-card {
+            background: rgba(45, 45, 45, 0.3);
+            border: 1px solid var(--border-color);
+            padding: 40px 30px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(201, 169, 97, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .contact-card:hover::before {
+            left: 100%;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-gold);
+            background: rgba(45, 45, 45, 0.6);
+            box-shadow: 0 20px 40px rgba(201, 169, 97, 0.2);
+        }
+
+        .contact-card-icon {
+            width: 70px;
+            height: 70px;
+            border: 2px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--accent-gold);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .contact-card:hover .contact-card-icon {
+            transform: rotate(360deg) scale(1.1);
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            box-shadow: 0 0 30px rgba(201, 169, 97, 0.5);
+        }
+
+        .contact-card-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .contact-card-text {
+            font-family: 'EB Garamond', serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .contact-card:hover .contact-card-label,
+        .contact-card:hover .contact-card-text {
+            color: var(--accent-gold);
+        }
+
+        .contact-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            margin: 60px 0;
+            opacity: 0.3;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            margin-top: 40px;
+        }
+
+        .contact-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: var(--accent-gold);
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover .contact-icon {
+            border-color: var(--accent-gold);
+            background: rgba(201, 169, 97, 0.1);
+        }
+
+        .contact-label {
+            font-family: 'EB Garamond', serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Project Modal/Popup Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            animation: fadeInModal 0.3s ease-out;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        @keyframes fadeInModal {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-content {
+            background: var(--secondary-dark);
+            border: 1px solid var(--accent-gold);
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.4s ease-out;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-header {
+            padding: 50px 50px 30px;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 32px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+            background: transparent;
+        }
+
+        .modal-close:hover {
+            color: var(--accent-gold);
+            border-color: var(--accent-gold);
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--accent-gold);
+        }
+
+        .modal-type {
+            font-family: 'EB Garamond', serif;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .modal-body {
+            padding: 40px 50px;
+        }
+
+        .modal-description {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 35px;
+        }
+
+        .modal-section {
+            margin-bottom: 40px;
+        }
+
+        .modal-section h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+        }
+
+        .modal-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-features li {
+            padding-left: 30px;
+            position: relative;
+            margin-bottom: 15px;
+            font-size: 17px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .modal-features li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+        }
+
+        .modal-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        .modal-video {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--primary-dark);
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-family: 'EB Garamond', serif;
+            font-size: 18px;
+        }
+
+        .modal-video iframe,
+        .modal-video video {
+            width: 100%;
+            height: 100%;
+        }
+
+        .modal-github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 45px;
+            font-family: 'EB Garamond', serif;
+            font-size: 16px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid var(--accent-gold);
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            transition: all 0.4s ease;
+        }
+
+        .modal-github-link:hover {
+            background: var(--accent-copper);
+            border-color: var(--accent-copper);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        footer p {
+            font-family: 'EB Garamond', serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 40px;
+            }
+
+            .hero .container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .spline-container {
+                height: 500px;
+            }
+
+            .hero h1 {
+                font-size: 64px;
+            }
+
+            .project-card {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card:nth-child(even) .project-image {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .contact-content h2 {
+                font-size: 42px;
+            }
+
+            .contact-description {
+                font-size: 18px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .contact-card {
+                padding: 35px 25px;
+            }
+
+            .nav-links {
+                gap: 30px;
+            }
+
+            .language-toggle {
+                padding: 6px 16px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 25px;
+            }
+
+            .nav-links {
+                gap: 25px;
+            }
+
+            .nav-links a {
+                font-size: 14px;
+            }
+
+            .hero {
+                padding: 80px 0 100px;
+            }
+
+            .hero .container {
+                grid-template-columns: 1fr;
+            }
+
+            .spline-container {
+                height: 400px;
+                order: -1;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero-description {
+                font-size: 18px;
+            }
+
+            .section {
+                padding: 80px 0;
+            }
+
+            .section-title {
+                font-size: 42px;
+            }
+
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .modal-content {
+                max-width: 95%;
+                max-height: 95vh;
+            }
+
+            .modal-header,
+            .modal-body {
+                padding: 30px 25px;
+            }
+
+            .modal-title {
+                font-size: 32px;
+            }
+
+            .modal-close {
+                top: 20px;
+                right: 20px;
+            }
+
+            .contact-content h2 {
+                font-size: 38px;
+            }
+
+            .contact-description {
+                font-size: 17px;
+            }
+
+            .cta-buttons {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .cta-buttons a {
+                width: 100%;
+                text-align: center;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .contact-card {
+                padding: 30px 20px;
+            }
+
+            .contact-card-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+
+            .contact-card-label {
+                font-size: 20px;
+            }
+
+            .contact-card-text {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">MN</div>
+                <ul class="nav-links">
+                    <li><a href="#expertise" data-translate="nav_expertise">Expertise</a></li>
+                    <li><a href="#projects" data-translate="nav_projects">Projects</a></li>
+                    <li><a href="#experience" data-translate="nav_experience">Experience</a></li>
+                    <li><a href="#contact" data-translate="nav_contact">Contact</a></li>
+                    <li>
+                        <button id="languageToggle" class="language-toggle" onclick="toggleLanguage()">
+                            <span id="currentLang">EN</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-subtitle" data-translate="hero_subtitle">Full-Stack Developer</div>
+                <h1><span data-translate="hero_title_1">Building</span> <strong data-translate="hero_title_2">Innovative</strong><br><span data-translate="hero_title_3">Digital Solutions</span></h1>
+                <p class="hero-description" data-translate="hero_description">
+                    Full-Stack Developer skilled in React.js, Angular, Firebase, and Java with experience building responsive, scalable web apps. Passionate about clean UI/UX, writing maintainable code, and solving real-world problems in agile teams.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn btn-primary" data-translate="hero_btn_work">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary" data-translate="hero_btn_contact">Get In Touch</a>
+                </div>
+            </div>
+            <div class="spline-container">
+                <spline-viewer url="https://prod.spline.design/8Zg4mTVtroZYuyyf/scene.splinecode"></spline-viewer>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="expertise" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="expertise_title">Areas of Expertise</h2>
+                <p class="section-subtitle" data-translate="expertise_subtitle">
+                    Specialized competencies developed through years of building production-grade software systems
+                </p>
+            </div>
+            <div class="expertise-grid">
+                <div class="expertise-card">
+                    <div class="expertise-icon">◆</div>
+                    <h3 data-translate="expertise_frontend_title">Frontend Development</h3>
+                    <p data-translate="expertise_frontend_desc">Creating responsive, user-centric interfaces with modern frameworks and design systems, ensuring exceptional user experience across all devices.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Angular</span>
+                        <span class="tech-tag">Tailwind CSS</span>
+                        <span class="tech-tag">Figma</span>
+                    </div>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">❖</div>
+                    <h3 data-translate="expertise_backend_title">Backend Development</h3>
+                    <p data-translate="expertise_backend_desc">Building robust server-side applications and RESTful APIs with focus on scalability, security, and efficient data management.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">SQL</span>
+                    </div>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">✦</div>
+                    <h3 data-translate="expertise_programming_title">Programming & Development</h3>
+                    <p data-translate="expertise_programming_desc">Strong foundation in object-oriented programming with expertise in multiple languages for versatile application development.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">C#</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Git/GitHub</span>
+                    </div>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">◈</div>
+                    <h3 data-translate="expertise_rpa_title">RPA & Automation</h3>
+                    <p data-translate="expertise_rpa_desc">Developing intelligent automation solutions using RPA and AI to streamline business processes and reduce manual effort.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">UiPath</span>
+                        <span class="tech-tag">AI Integration</span>
+                        <span class="tech-tag">Process Automation</span>
+                    </div>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">✧</div>
+                    <h3 data-translate="expertise_ar_title">AR & Unity Development</h3>
+                    <p data-translate="expertise_ar_desc">Creating immersive augmented reality experiences and interactive applications using Unity for innovative spatial computing solutions.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Unity</span>
+                        <span class="tech-tag">AR Development</span>
+                        <span class="tech-tag">C#</span>
+                        <span class="tech-tag">3D Graphics</span>
+                    </div>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">✵</div>
+                    <h3 data-translate="expertise_ai_title">AI-Assisted Development</h3>
+                    <p data-translate="expertise_ai_desc">Leveraging cutting-edge AI tools to accelerate development, improve code quality, and implement intelligent features in modern applications.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">GitHub Copilot</span>
+                        <span class="tech-tag">Claude</span>
+                        <span class="tech-tag">Cursor AI</span>
+                        <span class="tech-tag">ChatGPT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="projects_title">Featured Projects</h2>
+                <p class="section-subtitle" data-translate="projects_subtitle">
+                    A curated selection of notable work demonstrating technical excellence and innovative problem-solving
+                </p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">📚</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-type">Educational Platform</div>
+                        <h3>DataVault</h3>
+                        <p class="project-description">
+                            A secure note management platform enabling categorized access, discussion forums, and AI-powered quizzes, improving collaborative learning and student exam preparation efficiency.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">AI Integration</span>
+                            <span class="tech-tag">Real-time Chat</span>
+                        </div>
+                        <a href="#" class="project-link" onclick="openModal('datavault'); return false;" data-translate="project_details">
+                            View Details →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">🎮</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-type">AR / Unity Development</div>
+                        <h3>AR Indoor-Nav</h3>
+                        <p class="project-description">
+                            An augmented reality-based indoor navigation system providing precise real-time spatial guidance using advanced AR technology and Unity engine for seamless indoor wayfinding experiences.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Unity</span>
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">AR Foundation</span>
+                            <span class="tech-tag">Spatial Computing</span>
+                        </div>
+                        <a href="#" class="project-link" onclick="openModal('arindoor'); return false;" data-translate="project_details">
+                            View Details →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="experience_title">Professional Experience</h2>
+                <p class="section-subtitle" data-translate="experience_subtitle">
+                    Building innovative solutions across RPA, full-stack development, AR, and enterprise systems
+                </p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-period">OCT 2025 - PRESENT</div>
+                    <h3>Full-Stack Developer Intern</h3>
+                    <div class="timeline-company">ONYX Software, Strategic Security Company · Kuwait · <a href="https://onyxgym.onyxsystems.net/" target="_blank" style="color: var(--accent-gold); text-decoration: none; border-bottom: 1px solid var(--accent-gold);">onyxgym.onyxsystems.net</a></div>
+                    <p class="timeline-description">
+                        Developing a comprehensive Gym Management System with advanced features for member management, trainer scheduling, and operational analytics for multi-branch fitness centers.
+                    </p>
+                    <ul class="timeline-achievements">
+                        <li>Built member enrollment and membership management system</li>
+                        <li>Implemented locker assignment and management features</li>
+                        <li>Created trainer scheduling and branch transfer functionality</li>
+                        <li>Developed performance statistics dashboard and reporting tools</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-period">APR 2025 - JUN 2025</div>
+                    <h3>Front-End Developer</h3>
+                    <div class="timeline-company">SkillCompiler · Kuwait (Freelancer) · <a href="https://www.skillcompiler.com" target="_blank" style="color: var(--accent-gold); text-decoration: none; border-bottom: 1px solid var(--accent-gold);">www.skillcompiler.com</a></div>
+                    <p class="timeline-description">
+                        Led frontend development for SkillCompiler, a skill assessment platform delivering real-world challenges, instant feedback, and personalized learning paths to enhance practical competency.
+                    </p>
+                    <ul class="timeline-achievements">
+                        <li>Designed and implemented responsive UI using React and modern CSS</li>
+                        <li>Created interactive challenge interfaces with real-time feedback</li>
+                        <li>Developed personalized dashboard for tracking learning progress</li>
+                        <li>Integrated API services for seamless data flow and user experience</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-period">NOV 2024</div>
+                    <h3>RPA Developer</h3>
+                    <div class="timeline-company">Radial Knights Tech · India (Freelancer)</div>
+                    <p class="timeline-description">
+                        Developed an automated contract management system using UiPath and AI that revolutionized contract handling processes, ensuring compliance and reducing manual workload.
+                    </p>
+                    <ul class="timeline-achievements">
+                        <li>Built AI-powered system to extract contract expiry dates automatically</li>
+                        <li>Implemented automated reminder email system for timely renewals</li>
+                        <li>Reduced manual errors by 85% through intelligent automation</li>
+                        <li>Ensured regulatory compliance with minimal human intervention</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="contact-content">
+                <h2 data-translate="contact_title">Let's Build Something Exceptional</h2>
+                <p class="contact-description" data-translate="contact_description">
+                    I'm always interested in hearing about new opportunities, innovative projects, and collaborative ventures. Whether you're looking for a developer to join your team or want to discuss an exciting idea, I'd love to connect.
+                </p>
+                
+                <div class="cta-buttons">
+                    <a href="mailto:mohamednoushad20066@gmail.com" class="btn btn-primary" data-translate="contact_btn_email">Send Email</a>
+                    <a href="https://github.com/mohamednoushad2006" target="_blank" class="btn btn-secondary" data-translate="contact_btn_github">View GitHub</a>
+                </div>
+
+                <div class="contact-divider"></div>
+
+                <div class="contact-grid">
+                    <a href="https://www.linkedin.com/in/mohamed-noushad" target="_blank" class="contact-card">
+                        <div class="contact-card-icon">in</div>
+                        <div class="contact-card-label" data-translate="contact_label_linkedin">LinkedIn</div>
+                        <div class="contact-card-text">Connect Professionally</div>
+                    </a>
+                    
+                    <a href="https://github.com/mohamednoushad2006" target="_blank" class="contact-card">
+                        <div class="contact-card-icon">gh</div>
+                        <div class="contact-card-label" data-translate="contact_label_github">GitHub</div>
+                        <div class="contact-card-text">View My Code</div>
+                    </a>
+                    
+                    <a href="mailto:mohamednoushad20066@gmail.com" class="contact-card">
+                        <div class="contact-card-icon">@</div>
+                        <div class="contact-card-label" data-translate="contact_label_email">Email</div>
+                        <div class="contact-card-text">Send a Message</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p data-translate="footer_text">© 2026 Mohamed Noushad. Crafted with precision and passion.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.4}px)`;
+                hero.style.opacity = 1 - (scrolled / 800);
+            }
+        });
+
+        // Cursor trail effect (subtle)
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function updateCursor() {
+            const dx = mouseX - cursorX;
+            const dy = mouseY - cursorY;
+            
+            cursorX += dx * 0.1;
+            cursorY += dy * 0.1;
+            
+            requestAnimationFrame(updateCursor);
+        }
+        
+        updateCursor();
+
+        // Multi-language Support
+        const translations = {
+            en: {
+                // Navigation
+                nav_expertise: "Expertise",
+                nav_projects: "Projects",
+                nav_experience: "Experience",
+                nav_contact: "Contact",
+                
+                // Hero Section
+                hero_subtitle: "Full-Stack Developer",
+                hero_title_1: "Building",
+                hero_title_2: "Innovative",
+                hero_title_3: "Digital Solutions",
+                hero_description: "Full-Stack Developer skilled in React.js, Angular, Firebase, and Java with experience building responsive, scalable web apps. Passionate about clean UI/UX, writing maintainable code, and solving real-world problems in agile teams.",
+                hero_btn_work: "View My Work",
+                hero_btn_contact: "Get In Touch",
+                
+                // Expertise Section
+                expertise_title: "Areas of Expertise",
+                expertise_subtitle: "Specialized competencies developed through years of building production-grade software systems",
+                
+                expertise_frontend_title: "Frontend Development",
+                expertise_frontend_desc: "Creating responsive, user-centric interfaces with modern frameworks and design systems, ensuring exceptional user experience across all devices.",
+                
+                expertise_backend_title: "Backend Development",
+                expertise_backend_desc: "Building robust server-side applications and RESTful APIs with focus on scalability, security, and efficient data management.",
+                
+                expertise_programming_title: "Programming & Development",
+                expertise_programming_desc: "Strong foundation in object-oriented programming with expertise in multiple languages for versatile application development.",
+                
+                expertise_rpa_title: "RPA & Automation",
+                expertise_rpa_desc: "Developing intelligent automation solutions using RPA and AI to streamline business processes and reduce manual effort.",
+                
+                expertise_ar_title: "AR & Unity Development",
+                expertise_ar_desc: "Creating immersive augmented reality experiences and interactive applications using Unity for innovative spatial computing solutions.",
+                
+                expertise_ai_title: "AI-Assisted Development",
+                expertise_ai_desc: "Leveraging cutting-edge AI tools to accelerate development, improve code quality, and implement intelligent features in modern applications.",
+                
+                // Projects Section
+                projects_title: "Featured Projects",
+                projects_subtitle: "A curated selection of notable work demonstrating technical excellence and innovative problem-solving",
+                project_details: "View Details",
+                
+                // Experience Section
+                experience_title: "Professional Experience",
+                experience_subtitle: "Building innovative solutions across RPA, full-stack development, AR, and enterprise systems",
+                
+                // Contact Section
+                contact_title: "Let's Build Something Exceptional",
+                contact_description: "I'm always interested in hearing about new opportunities, innovative projects, and collaborative ventures. Whether you're looking for a developer to join your team or want to discuss an exciting idea, I'd love to connect.",
+                contact_btn_email: "Send Email",
+                contact_btn_github: "View GitHub",
+                contact_label_linkedin: "LinkedIn",
+                contact_label_github: "GitHub",
+                contact_label_email: "Email",
+                
+                // Footer
+                footer_text: "© 2026 Mohamed Noushad. Crafted with precision and passion.",
+                
+                // Modal
+                modal_features: "Key Features",
+                modal_tech: "Technologies Used",
+                modal_demo: "Demo Video",
+                modal_github: "View on GitHub",
+                modal_demo_coming: "Demo video coming soon"
+            },
+            fr: {
+                // Navigation
+                nav_expertise: "Expertise",
+                nav_projects: "Projets",
+                nav_experience: "Expérience",
+                nav_contact: "Contact",
+                
+                // Hero Section
+                hero_subtitle: "Développeur Full-Stack",
+                hero_title_1: "Créer des",
+                hero_title_2: "Solutions",
+                hero_title_3: "Numériques Innovantes",
+                hero_description: "Développeur Full-Stack compétent en React.js, Angular, Firebase et Java avec expérience dans la création d'applications web réactives et évolutives. Passionné par l'UI/UX épuré, l'écriture de code maintenable et la résolution de problèmes concrets en équipes agiles.",
+                hero_btn_work: "Voir Mes Projets",
+                hero_btn_contact: "Me Contacter",
+                
+                // Expertise Section
+                expertise_title: "Domaines d'Expertise",
+                expertise_subtitle: "Compétences spécialisées développées au fil des années de création de systèmes logiciels de qualité production",
+                
+                expertise_frontend_title: "Développement Frontend",
+                expertise_frontend_desc: "Création d'interfaces réactives et centrées sur l'utilisateur avec des frameworks modernes et des systèmes de conception, garantissant une expérience utilisateur exceptionnelle sur tous les appareils.",
+                
+                expertise_backend_title: "Développement Backend",
+                expertise_backend_desc: "Construction d'applications côté serveur robustes et d'API RESTful en mettant l'accent sur l'évolutivité, la sécurité et la gestion efficace des données.",
+                
+                expertise_programming_title: "Programmation & Développement",
+                expertise_programming_desc: "Solide base en programmation orientée objet avec expertise dans plusieurs langages pour un développement d'applications polyvalent.",
+                
+                expertise_rpa_title: "RPA & Automatisation",
+                expertise_rpa_desc: "Développement de solutions d'automatisation intelligentes utilisant RPA et IA pour rationaliser les processus métier et réduire les efforts manuels.",
+                
+                expertise_ar_title: "Développement AR & Unity",
+                expertise_ar_desc: "Création d'expériences de réalité augmentée immersives et d'applications interactives utilisant Unity pour des solutions informatiques spatiales innovantes.",
+                
+                expertise_ai_title: "Développement Assisté par IA",
+                expertise_ai_desc: "Exploitation d'outils IA de pointe pour accélérer le développement, améliorer la qualité du code et implémenter des fonctionnalités intelligentes dans les applications modernes.",
+                
+                // Projects Section
+                projects_title: "Projets Vedettes",
+                projects_subtitle: "Une sélection de travaux remarquables démontrant l'excellence technique et la résolution de problèmes innovante",
+                project_details: "Voir Détails",
+                
+                // Experience Section
+                experience_title: "Expérience Professionnelle",
+                experience_subtitle: "Création de solutions innovantes en RPA, développement full-stack, AR et systèmes d'entreprise",
+                
+                // Contact Section
+                contact_title: "Créons Quelque Chose d'Exceptionnel",
+                contact_description: "Je suis toujours intéressé par de nouvelles opportunités, des projets innovants et des collaborations. Que vous cherchiez un développeur pour rejoindre votre équipe ou que vous souhaitiez discuter d'une idée passionnante, j'aimerais échanger.",
+                contact_btn_email: "Envoyer un Email",
+                contact_btn_github: "Voir GitHub",
+                contact_label_linkedin: "LinkedIn",
+                contact_label_github: "GitHub",
+                contact_label_email: "Email",
+                
+                // Footer
+                footer_text: "© 2026 Mohamed Noushad. Conçu avec précision et passion.",
+                
+                // Modal
+                modal_features: "Caractéristiques Clés",
+                modal_tech: "Technologies Utilisées",
+                modal_demo: "Vidéo Démo",
+                modal_github: "Voir sur GitHub",
+                modal_demo_coming: "Vidéo de démonstration à venir"
+            }
+        };
+
+        let currentLanguage = localStorage.getItem('language') || 'en';
+
+        function translatePage() {
+            const lang = currentLanguage;
+            const t = translations[lang];
+            
+            // Translate all elements with data-translate attribute
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (t[key]) {
+                    // Special handling for buttons/links that need arrows
+                    if (key.includes('btn') || key.includes('details')) {
+                        if (key === 'project_details') {
+                            element.innerHTML = t[key] + ' →';
+                        } else {
+                            element.textContent = t[key];
+                        }
+                    } else {
+                        element.textContent = t[key];
+                    }
+                }
+            });
+            
+            // Update language button display
+            const langButton = document.getElementById('currentLang');
+            if (langButton) {
+                langButton.textContent = lang.toUpperCase();
+            }
+            
+            // Update HTML lang attribute
+            document.documentElement.setAttribute('lang', lang);
+            
+            // Save to localStorage
+            localStorage.setItem('language', lang);
+        }
+
+        function toggleLanguage() {
+            // Add translating class for animation
+            document.body.classList.add('translating');
+            
+            // Toggle language
+            currentLanguage = currentLanguage === 'en' ? 'fr' : 'en';
+            
+            // Small delay for visual feedback
+            setTimeout(() => {
+                // Apply translation
+                translatePage();
+                
+                // Remove animation class
+                setTimeout(() => {
+                    document.body.classList.remove('translating');
+                }, 300);
+            }, 50);
+        }
+
+        // Apply translation when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', translatePage);
+        } else {
+            translatePage();
+        }
+
+        // Also apply on window load as backup
+        window.addEventListener('load', function() {
+            setTimeout(translatePage, 100);
+        });
+
+        // Remove Spline watermark
+        function hideSplineWatermark() {
+            const splineViewer = document.querySelector('spline-viewer');
+            if (splineViewer && splineViewer.shadowRoot) {
+                const style = document.createElement('style');
+                style.innerHTML = `
+                    #logo, .logo, [class*="logo"], [id*="logo"],
+                    .watermark, [class*="watermark"],
+                    #branding, .branding, [class*="branding"] {
+                        display: none !important;
+                        opacity: 0 !important;
+                        visibility: hidden !important;
+                    }
+                `;
+                splineViewer.shadowRoot.appendChild(style);
+            }
+        }
+
+        // Try to hide watermark after Spline loads
+        setTimeout(hideSplineWatermark, 1000);
+        setTimeout(hideSplineWatermark, 3000);
+        setTimeout(hideSplineWatermark, 5000);
+
+        // Also try on load
+        window.addEventListener('load', () => {
+            setTimeout(hideSplineWatermark, 500);
+            setTimeout(hideSplineWatermark, 2000);
+        });
+
+        // Modal Functions
+        function openModal(projectId) {
+            const modal = document.getElementById('projectModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            // Get current language
+            const lang = currentLanguage || 'en';
+            const t = translations[lang];
+            
+            // Project data
+            const projects = {
+                datavault: {
+                    type: lang === 'en' ? 'Educational Platform' : 'Plateforme Éducative',
+                    title: 'DataVault',
+                    description: lang === 'en' 
+                        ? 'A comprehensive secure note management platform designed to revolutionize collaborative learning through intelligent organization, real-time discussions, and AI-powered assessment tools.'
+                        : 'Une plateforme complète de gestion de notes sécurisée conçue pour révolutionner l\'apprentissage collaboratif grâce à une organisation intelligente, des discussions en temps réel et des outils d\'évaluation alimentés par l\'IA.',
+                    features: lang === 'en' ? [
+                        'Secure categorized note storage with role-based access control',
+                        'Real-time discussion forums for collaborative learning',
+                        'AI-powered quiz generation based on uploaded content',
+                        'Smart search and tagging system for easy content discovery',
+                        'Progress tracking and performance analytics',
+                        'Multi-format support for documents, images, and videos'
+                    ] : [
+                        'Stockage de notes catégorisées sécurisé avec contrôle d\'accès basé sur les rôles',
+                        'Forums de discussion en temps réel pour l\'apprentissage collaboratif',
+                        'Génération de quiz alimentée par l\'IA basée sur le contenu téléchargé',
+                        'Système de recherche et d\'étiquetage intelligent pour une découverte facile du contenu',
+                        'Suivi des progrès et analyses de performance',
+                        'Support multi-format pour documents, images et vidéos'
+                    ],
+                    tech: ['React', 'Firebase', 'AI Integration', 'Real-time Chat', 'Authentication'],
+                    github: 'https://github.com/mohamednoushad2006',
+                    video: ''
+                },
+                arindoor: {
+                    type: lang === 'en' ? 'AR / Unity Development' : 'Développement AR / Unity',
+                    title: 'AR Indoor-Nav',
+                    description: lang === 'en'
+                        ? 'An innovative augmented reality navigation system that provides precise indoor wayfinding using cutting-edge AR technology and spatial computing to guide users through complex indoor environments.'
+                        : 'Un système de navigation en réalité augmentée innovant qui fournit une orientation intérieure précise en utilisant une technologie AR de pointe et l\'informatique spatiale pour guider les utilisateurs dans des environnements intérieurs complexes.',
+                    features: lang === 'en' ? [
+                        'Real-time AR-based indoor navigation with visual indicators',
+                        'Precise spatial mapping and location tracking',
+                        'Interactive 3D waypoint markers and directional cues',
+                        'Multi-floor building support with automatic level detection',
+                        'Points of interest highlighting and information display',
+                        'Optimized performance for mobile AR devices'
+                    ] : [
+                        'Navigation intérieure basée sur AR en temps réel avec indicateurs visuels',
+                        'Cartographie spatiale précise et suivi de localisation',
+                        'Marqueurs de points de cheminement 3D interactifs et indices directionnels',
+                        'Support de bâtiments à plusieurs étages avec détection automatique de niveau',
+                        'Mise en évidence des points d\'intérêt et affichage d\'informations',
+                        'Performance optimisée pour les appareils AR mobiles'
+                    ],
+                    tech: ['Unity', 'C#', 'AR Foundation', 'Spatial Computing', '3D Graphics'],
+                    github: 'https://github.com/mohamednoushad2006',
+                    video: ''
+                }
+            };
+            
+            const project = projects[projectId];
+            
+            // Build modal content with translations
+            let featuresHTML = project.features.map(f => `<li>${f}</li>`).join('');
+            let techHTML = project.tech.map(t => `<span class="tech-tag">${t}</span>`).join('');
+            let videoHTML = project.video 
+                ? `<iframe src="${project.video}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`
+                : `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--text-secondary);">${t.modal_demo_coming}</div>`;
+            
+            modalContent.innerHTML = `
+                <div class="modal-header">
+                    <div class="modal-close" onclick="closeModal()">&times;</div>
+                    <div class="modal-type">${project.type}</div>
+                    <h2 class="modal-title">${project.title}</h2>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-description">${project.description}</p>
+                    
+                    <div class="modal-section">
+                        <h4>${t.modal_features}</h4>
+                        <ul class="modal-features">
+                            ${featuresHTML}
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h4>${t.modal_tech}</h4>
+                        <div class="modal-tech">
+                            ${techHTML}
+                        </div>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h4>${t.modal_demo}</h4>
+                        <div class="modal-video">
+                            ${videoHTML}
+                        </div>
+                    </div>
+                    
+                    <a href="${project.github}" target="_blank" class="modal-github-link">
+                        ${t.modal_github} →
+                    </a>
+                </div>
+            `;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('projectModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('projectModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+        
+        // Close modal on ESC key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal">
+        <div id="modalContent" class="modal-content">
+            <!-- Content will be dynamically inserted here -->
+        </div>
+    </div>
+
+</body>
+</html>
